@@ -1,0 +1,22 @@
+{
+  "name": "redux",
+  "version": "1.0.0",
+  "description": "project to study redux",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Raphael-Ramalho/redux.git"
+  },
+  "author": "raphael ramalho",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Raphael-Ramalho/redux/issues"
+  },
+  "homepage": "https://github.com/Raphael-Ramalho/redux#readme",
+  "dependencies": {
+    "redux": "5.0.1"
+  }
+}
