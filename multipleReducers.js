@@ -3,7 +3,6 @@ const reduxLogger = require("redux-logger");
 
 const createStore = redux.createStore;
 const combineReducers = redux.combineReducers;
-const logger = reduxLogger.createLogger();
 const applyMiddleware = redux.applyMiddleware;
 
 const BUY_CAKE = "BUY_CAKE";
@@ -61,17 +60,27 @@ const rootReducer = combineReducers({
   ice: iceReducer,
 });
 
-const store = createStore(
-  rootReducer,
-  applyMiddleware(logger)
-);
+const CustomMiddleware = ({ getState }) => {
+  return (next) => (action) => {
+    console.log("will dispatch", action);
+
+    // Call the next dispatch method in the middleware chain.
+    const returnValue = next(action);
+
+    console.log("state after dispatch", getState());
+
+    // This will likely be the action itself, unless
+    // a middleware further in chain changed it.
+    return returnValue;
+  };
+};
+
+const store = createStore(rootReducer, applyMiddleware(CustomMiddleware));
 
 console.log("Initial State", store.getState());
-const unsubscribe = store.subscribe(() => console.log('currentState:',store.getState()));
 
 store.dispatch(buyCake());
 store.dispatch(buyCake());
 store.dispatch(buyCake());
 store.dispatch(buyIceCreams());
 store.dispatch(buyIceCreams());
-unsubscribe();
